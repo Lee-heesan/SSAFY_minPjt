@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>구해줘 HOME</title>
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div id="header-container"></div>
+    <div class="banner-container">
+        <div class="banner" id="banner">
+            <!-- 여기에 이미지가 없으면 배너가 동작하지 않음 -->
+        </div>
+        <button class="banner-button prev" onclick="prevBanner()">&#10094;</button>
+        <button class="banner-button next" onclick="nextBanner()">&#10095;</button>
+    </div>
+
+    <div class="content">
+        <div class="info">
+            <a href="map.html">
+                <h2>실거래가 조회 </h2>
+                <p>실거래가 조회 및 지도 제공</p>
+            </a>
+        </div>
+        <div class="news">
+            <a href="#">
+            <h2>부동산 뉴스</h2>
+            <p>서울 아파트, 매매·전세 값 변동 추이...</p>
+            </a>
+        </div>
+    </div>
+
+    <div class="recommended">
+        <h3>추천 매물</h3>
+        <div class="property-list">
+            <img src="https://cdn.gnnews.co.kr/news/photo/202102/467585_257246_1836.jpg" alt="img1"  class="property">
+            <img src="https://cdn.gnnews.co.kr/news/photo/202102/467585_257246_1836.jpg" alt="img1"  class="property">
+            <img src="https://cdn.gnnews.co.kr/news/photo/202102/467585_257246_1836.jpg" alt="img1"  class="property">
+            <img src="https://cdn.gnnews.co.kr/news/photo/202102/467585_257246_1836.jpg" alt="img1"  class="property">
+        </div>
+    </div>
+    
+    <div id="bottom-container"></div>
+
+    <script>
+        let index = 0;
+        const banner = document.getElementById("banner");
+        let banners = [];
+        let slideInterval;
+
+
+          // 헤더 불러오기
+        fetch("header.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("header-container").innerHTML = data;
+            })
+            .catch(error => console.error("헤더 로드 실패:", error));
+
+
+            // 바텀 불러오기
+        fetch("bottom.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("bottom-container").innerHTML = data;
+            })
+            .catch(error => console.error("바텀 로드 실패:", error));
+        function loadImages() {
+            const imageUrls = [
+                "https://image.ajunews.com/content/image/2022/04/04/20220404181310254680.jpg",
+                "https://thumb.mt.co.kr/06/2022/07/2022071323233486792_1.jpg/dims/optimize/",
+                "https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/202303/05/17313d5e-aa0d-4848-9e22-d07d731d5525.jpg"
+            ];
+    
+            if (imageUrls.length === 0) {
+                banner.innerHTML = "<p>이미지가 없습니다.</p>";
+                return;
+            }
+    
+            imageUrls.forEach((src) => {
+                const img = document.createElement("img");
+                img.src = src;
+                img.alt = "배너 이미지";
+                banner.appendChild(img);
+            });
+    
+            banners = document.querySelectorAll(".banner img");
+            startAutoSlide(); // 이미지 로드 후 자동 슬라이드 시작
+        }
+    
+        function showBanner() {
+            if (banners.length === 0) return;
+            banner.style.transform = `translateX(-${index * 100}%)`;
+        }
+    
+        function nextBanner() {
+            if (banners.length <= 1) return;
+            index = (index + 1) % banners.length;
+            showBanner();
+            resetAutoSlide(); // 타이머 초기화
+        }
+    
+        function prevBanner() {
+            if (banners.length <= 1) return;
+            index = (index - 1 + banners.length) % banners.length;
+            showBanner();
+            resetAutoSlide(); // 타이머 초기화
+        }
+    
+        function startAutoSlide() {
+            if (banners.length > 1) {
+                slideInterval = setInterval(nextBanner, 5000); // 5초마다 자동 슬라이드
+            }
+        }
+    
+        function resetAutoSlide() {
+            clearInterval(slideInterval); // 기존 타이머 제거
+            startAutoSlide(); // 새로운 5초 타이머 시작
+        }
+    
+        loadImages();
+    </script>
+    
+
+</body>
+</html>

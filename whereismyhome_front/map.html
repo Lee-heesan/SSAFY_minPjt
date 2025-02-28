@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>실거래가 조회</title>
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <style>
+      
+      body {
+          margin: 0;  
+          padding: 0;
+          font-family: Arial, sans-serif;
+          background-color: #f9f9f9;
+          text-align: center;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      .search-container {
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+      }
+      .search-box {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        padding: 15px;
+        background: #ffffff;
+        border-radius: 8px;
+      }
+
+      select, input {
+        padding: 8px;
+        font-size: 14px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        width: 180px;
+      }
+
+      button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        font-size: 14px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      #map {
+        width: 100%;
+        height: 500px;
+        margin-top: 20px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+      }
+
+      .apt-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .apt-map {
+    width: 150px;
+    height: 100px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+  }
+
+  .apt-info {
+    flex-grow: 1;
+    text-align: left;
+  }
+
+  .apt-info h3 {
+    margin: 0;
+    font-size: 18px;
+  }
+
+  .apt-info p {
+    margin: 5px 0;
+  }
+    </style>
+  </head>
+  <body>
+    
+    <div id="header-container"></div>
+    <div class="container">
+      <h2>실거래가 조회</h2>
+      <div class="search-box">
+        <label>지역 선택:</label>
+        <select id="sido">
+          <option value="" selected disabled>시도 선택</option>
+        </select>
+        <select id="gugun">
+          <option value="" selected disabled>구군 선택</option>
+        </select>
+        <select id="dong">
+          <option value="" selected disabled>읍면동 선택</option>
+        </select>
+        <input type="month" id="dealYmd" />
+        <button id="btn_apt_search">아파트 조회</button>
+      </div>
+      <hr />
+      <div id="map"></div>
+      	
+      <h2>거래 정보</h2>
+      <div id="apt-list"></div>
+    </div>
+    
+    <div id="bottom-container"></div>
+  </body>
+
+  <!-- 서비스 ID 설정 -->
+  <script
+    type="text/javascript"
+    src="https://sgisapi.kostat.go.kr/OpenAPI3/auth/javascriptAuth?consumer_key=afa1af3e0a5b40a891ef"
+  ></script>
+  <script src="js/keys.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/kostat.js"></script>
+  <script src="js/happyHouse.js"></script>
+  <script src="js/enjoytrip.js"></script>
+  <script>
+      // 헤더 불러오기
+      fetch("header.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("header-container").innerHTML = data;
+            })
+            .catch(error => console.error("헤더 로드 실패:", error));
+
+
+            // 바텀 불러오기
+        fetch("bottom.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("bottom-container").innerHTML = data;
+            })
+            .catch(error => console.error("바텀 로드 실패:", error));
+    const init = async () => {
+      updateSido();
+      areaCode1();
+      updateMap([
+        {
+          address: "서울특별시 강남구 테헤란로 212",
+          utmk: await getCoords("서울특별시 강남구 테헤란로 212"),
+          label: "멀티캠퍼스",
+        },
+      ]);
+    };
+    init();
+  </script>
+</html>
