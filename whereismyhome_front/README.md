@@ -5,14 +5,22 @@
 
 ## 작업현황
 
-   ① 메인페이지(1.png)
-![main](/uploads/e0c23b49dddd160e280efc96366cb340/main.png)
-      ② 회원관리/로그인(2.png)
-      
-![join2](/uploads/bbe4e6cd982f18383fe75c2fff41b6a3/join2.png)
-![login](/uploads/c635f5025e3036b49631cea22f392eb4/login.png)
-
-![join](/uploads/d24e62dcea095cc6db6a8c7ddeb51041/join.png)
-      ③ 실거래가 검색(3.png)
-      ![map](/uploads/f51426e40a7f8a97bd789902d6427fce/map.png)
-      ![edit](/uploads/cae07c3db01c0b743c4baefc1ddc3a9a/edit.png)
+   ### ① 메인페이지(1.png)
+   ![main](https://github.com/user-attachments/assets/fe66dcd7-9fea-4774-a3fb-461aec1c6d5a)
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+   ### ② 회원관리/로그인(2.png)
+   ![join2](https://github.com/user-attachments/assets/dc806abb-34ef-447c-8967-b5f021726672)
+   ![login](https://github.com/user-attachments/assets/8d6e7ce6-bb78-41ea-80e0-6f08b2153738)
+   ![join](https://github.com/user-attachments/assets/dbf4b90d-c64f-4f14-896f-0bd41e9d9c16)
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+   ### ③ 실거래가 검색(3.png)
+   ![map](https://github.com/user-attachments/assets/0ca9babe-672e-408c-902a-63fc54673bdf)
+   ![edit](https://github.com/user-attachments/assets/10bc351d-066f-4e99-a60b-0fdc3e9520b4)
